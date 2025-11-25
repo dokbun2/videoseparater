@@ -44,12 +44,13 @@ export default function FileUpload() {
 
     setIsProcessing(true);
     setError(null);
-    
+
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/separate', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/separate`, {
         method: 'POST',
         body: formData,
       });
@@ -154,9 +155,9 @@ export default function FileUpload() {
                 <p className="text-white/50 text-sm">Isolated vocal track</p>
               </div>
             </div>
-            <audio controls className="w-full" src={`http://localhost:8000${result.vocals}`} />
-            <a 
-              href={`http://localhost:8000${result.vocals}`} 
+            <audio controls className="w-full" src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${result.vocals}`} />
+            <a
+              href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${result.vocals}`} 
               download 
               className="block mt-4 text-center text-sm text-purple-400 hover:text-purple-300"
             >
@@ -175,9 +176,9 @@ export default function FileUpload() {
                 <p className="text-white/50 text-sm">Instrumental track</p>
               </div>
             </div>
-            <audio controls className="w-full" src={`http://localhost:8000${result.accompaniment}`} />
-            <a 
-              href={`http://localhost:8000${result.accompaniment}`} 
+            <audio controls className="w-full" src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${result.accompaniment}`} />
+            <a
+              href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${result.accompaniment}`} 
               download 
               className="block mt-4 text-center text-sm text-cyan-400 hover:text-cyan-300"
             >
